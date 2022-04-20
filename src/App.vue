@@ -13,7 +13,6 @@ const input = ref();
 const size = ref(5);
 
 const term = ref('123');
-// const result = ref();
 const results = ref([{}, {}, {}, {}, {}]);
 const attemptNumber = ref(MAX_ATTEMPTS);
 const currentRow = ref(0);
@@ -24,7 +23,7 @@ const isInputValid = computed(() => {
 const wordComp = ref();
 
 onMounted(() => {
-  // input.value.focus();
+  input.value.focus();
 });
 
 const onType = (event) => {
@@ -84,15 +83,6 @@ const onSubmit = (event) => {
       :is-revealed="currentRow > index"
       :is-selected="currentRow === index"
     />
-  </div>
-  <div>
-    <!-- <Word
-      ref="wordComp"
-      :term="term"
-      :size="size"
-      :result="calculate(term, secretTerm)"
-      :is-revealed="false"
-    /> -->
   </div>
 </template>
 
