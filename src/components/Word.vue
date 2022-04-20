@@ -41,8 +41,9 @@ const letters = computed(() => {
 </script>
 
 <template>
-  <section :class="{ 'word--selected': props.isSelected }">
+  <section class="word" :class="{ 'word--selected': props.isSelected }">
     <Letter
+      class="letter"
       v-for="letter in letters"
       :letter="letter.letter"
       :is-correct="letter.isCorrect"
@@ -60,5 +61,20 @@ section {
 }
 .word--selected {
   border: 1px solid red;
+}
+/* .word::v-deep .letter:nth-child(1) .letter__content {
+  transition-delay: 0.2s;
+} */
+.word::v-deep .letter:nth-child(2) .letter__content {
+  transition-delay: 0.1s;
+}
+.word::v-deep .letter:nth-child(3) .letter__content {
+  transition-delay: 0.2s;
+}
+.word::v-deep .letter:nth-child(4) .letter__content {
+  transition-delay: 0.3s;
+}
+.word::v-deep .letter:nth-child(5) .letter__content {
+  transition-delay: 0.4s;
 }
 </style>
