@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import Components from 'unplugin-vue-components/vite';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,5 +10,6 @@ export default defineConfig({
     Components({
       /* options */
     }),
+    vanillaExtractPlugin(),
   ],
 });

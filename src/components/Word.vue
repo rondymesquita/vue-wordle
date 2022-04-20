@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch } from 'vue';
+import { word, wordIsSelected } from './Word.css.ts';
 
 const props = defineProps({
   size: {
@@ -41,7 +42,7 @@ const letters = computed(() => {
 </script>
 
 <template>
-  <section class="word" :class="{ 'word--selected': props.isSelected }">
+  <section :class="[word, { [wordIsSelected]: props.isSelected }]">
     <Letter
       class="letter"
       v-for="letter in letters"
@@ -54,27 +55,19 @@ const letters = computed(() => {
 </template>
 
 <style scoped>
-section {
-  display: flex;
-  padding: 4px;
-  text-transform: uppercase;
-}
-.word--selected {
+/* .word--selected {
   border: 1px solid red;
-}
-/* .word::v-deep .letter:nth-child(1) .letter__content {
-  transition-delay: 0.2s;
 } */
-.word::v-deep .letter:nth-child(2) .letter__content {
+section::v-deep .letter:nth-child(2) .letter__content {
   transition-delay: 0.1s;
 }
-.word::v-deep .letter:nth-child(3) .letter__content {
+section::v-deep .letter:nth-child(3) .letter__content {
   transition-delay: 0.2s;
 }
-.word::v-deep .letter:nth-child(4) .letter__content {
+section::v-deep .letter:nth-child(4) .letter__content {
   transition-delay: 0.3s;
 }
-.word::v-deep .letter:nth-child(5) .letter__content {
+section::v-deep .letter:nth-child(5) .letter__content {
   transition-delay: 0.4s;
 }
 </style>
