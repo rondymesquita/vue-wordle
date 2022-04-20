@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import { onMounted, ref, computed, nextTick } from 'vue';
-import { calculate } from './functions';
+import { calculate, resultFromTerm } from './functions';
 import { getWord } from './words';
 
-const maxAttempts = 7;
+const MAX_ATTEMPTS = 5;
+const MAX_TERM_SIZE = 5;
 
 const secretTerm = getWord();
 const input = ref();
 const size = ref(5);
 
-const term = ref(Array(5).fill(' ').join(''));
+const term = ref(Array(MAX_TERM_SIZE).fill(' ').join(''));
 const result = ref();
-const attempts = ref([]);
-const attemptNumber = ref(maxAttempts);
+const attempts = ref([{}, {}, {}, {}, {}]);
+const attemptNumber = ref(MAX_ATTEMPTS);
+const currentRow = ref(0);
 
 const isInputValid = computed(() => {
   return term.value.length === size.value;
@@ -27,7 +29,12 @@ const onType = (event) => {
   if (attemptNumber.value === 0) {
     return;
   }
-  term.value = event.target.value;
+  // term.value = event.target.value;
+
+  attempts.value[currentRow.value].result = resultFromTerm(
+    event.target.value,
+    MAX_TERM_SIZE
+  );
 };
 
 const onSubmit = (event) => {
@@ -83,22 +90,23 @@ const onSubmit = (event) => {
 
   <div class="scroll">
     <Word
-      v-for="attempt in attempts"
+      v-for="(attempt, index) in attempts"
       :key="`${new Date().toISOString()}${attempt.term}`"
       :result="attempt.result"
       :size="size"
       :term="attempt.term"
       :is-revealed="attempt.isRevealed"
+      :is-selected="currentRow === index"
     />
   </div>
   <div>
-    <Word
+    <!-- <Word
       ref="wordComp"
       :term="term"
       :size="size"
       :result="calculate(term, secretTerm)"
       :is-revealed="false"
-    />
+    /> -->
   </div>
 </template>
 

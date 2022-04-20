@@ -14,6 +14,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isSelected: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const letters = computed(() => {
@@ -36,7 +40,7 @@ const letters = computed(() => {
 </script>
 
 <template>
-  <section>
+  <section :class="{ 'word--selected': props.isSelected }">
     <Letter
       v-for="letter in letters"
       :letter="letter.letter"
@@ -52,5 +56,8 @@ section {
   display: flex;
   padding: 4px;
   text-transform: uppercase;
+}
+.word--selected {
+  border: 1px solid red;
 }
 </style>
