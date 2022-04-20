@@ -1,7 +1,7 @@
-export interface ResultItem {
-  letter: string;
-  isCorrect: boolean;
-  isExist: boolean;
+export class ResultItem {
+  letter: string = '';
+  isCorrect: boolean = false;
+  isExist: boolean = false;
 }
 
 export type Result = Array<ResultItem>;

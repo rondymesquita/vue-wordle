@@ -24,6 +24,7 @@ const letters = computed(() => {
   const lettersFromResult = [];
   for (let i = 0; i < props.size; i++) {
     const value = props.result[i];
+    console.log(value);
     if (value) {
       lettersFromResult.push(value);
     } else {

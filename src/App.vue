@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref, computed, nextTick } from 'vue';
-import { calculate, resultFromTerm } from './functions';
+import { calculate, resultFromTerm, createEmptyResult } from './functions';
 import { getWord } from './words';
+import { ResultItem } from './types';
+const { log } = console;
 
 const MAX_ATTEMPTS = 5;
 const MAX_TERM_SIZE = 5;
@@ -10,9 +12,9 @@ const secretTerm = getWord();
 const input = ref();
 const size = ref(5);
 
-const term = ref(Array(MAX_TERM_SIZE).fill(' ').join(''));
-const result = ref();
-const attempts = ref([{}, {}, {}, {}, {}]);
+const term = ref('123');
+// const result = ref();
+const results = ref([{}, {}, {}, {}, {}]);
 const attemptNumber = ref(MAX_ATTEMPTS);
 const currentRow = ref(0);
 
@@ -29,9 +31,9 @@ const onType = (event) => {
   if (attemptNumber.value === 0) {
     return;
   }
-  // term.value = event.target.value;
 
-  attempts.value[currentRow.value].result = resultFromTerm(
+  term.value = event.target.value;
+  results.value[currentRow.value].result = resultFromTerm(
     event.target.value,
     MAX_TERM_SIZE
   );
@@ -44,30 +46,15 @@ const onSubmit = (event) => {
   if (attemptNumber.value === 0) {
     return;
   }
-  result.value = calculate(term.value, secretTerm);
 
-  attempts.value.push({
-    result: result.value,
-    term: term.value,
-    isRevealed: true,
-  });
+  const result = calculate(term.value, secretTerm);
+  log(term.value, result);
+  results.value[currentRow.value].result = result;
 
   term.value = '';
   input.value.value = '';
   attemptNumber.value = attemptNumber.value - 1;
-
-  // nextTick(() => {
-  //   const lastIndex = attempts.value.length - 1;
-  //   const last = attempts.value[lastIndex];
-  //   console.log('>>last', last, attempts.value.length);
-  //   setTimeout(() => {
-  //     attempts.value.splice(lastIndex, 1, {
-  //       result: result.value,
-  //       term: term.value,
-  //       isRevealed: true,
-  //     });
-  //   }, 500);
-  // });
+  currentRow.value = currentRow.value + 1;
 
   event.preventDefault();
 };
@@ -90,12 +77,11 @@ const onSubmit = (event) => {
 
   <div class="scroll">
     <Word
-      v-for="(attempt, index) in attempts"
-      :key="`${new Date().toISOString()}${attempt.term}`"
-      :result="attempt.result"
+      v-for="(result, index) in results"
+      :key="`${index}`"
+      :result="result.result"
       :size="size"
-      :term="attempt.term"
-      :is-revealed="attempt.isRevealed"
+      :is-revealed="currentRow > index"
       :is-selected="currentRow === index"
     />
   </div>

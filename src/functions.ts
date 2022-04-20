@@ -1,24 +1,36 @@
 import { Result, ResultItem } from './types';
 
-export const resultFromTerm = (term: string, size: number): Result => {
-  const lettersFromResult: Result = [];
+export const createEmptyResult = (size: number) => {
+  const xxx = Array(size).fill({});
+
+  console.log(xxx);
+  return xxx;
+};
+
+export const resultFromTerm = (
+  term: string,
+  size: number
+): Array<ResultItem> => {
+  const result: Array<ResultItem> = [];
+
   for (let i = 0; i < size; i++) {
     const value = term[i];
     if (value) {
-      lettersFromResult.push({
+      result.push({
         letter: value,
         isCorrect: false,
         isExist: false,
       });
     } else {
-      lettersFromResult.push({
+      result.push({
         letter: ' ',
         isCorrect: false,
         isExist: false,
       });
     }
   }
-  return lettersFromResult;
+
+  return result;
 };
 
 export const calculate = (term: string, secretTerm: string) => {
