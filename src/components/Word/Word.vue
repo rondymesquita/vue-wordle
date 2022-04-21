@@ -27,7 +27,7 @@ const letters = computed(() => {
     const value = props.result[i];
     console.log(value);
     if (value) {
-      lettersFromResult.push(value);
+      lettersFromResult.push({...value});
     } else {
       lettersFromResult.push({
         letter: ' ',
@@ -39,6 +39,13 @@ const letters = computed(() => {
 
   return lettersFromResult;
 });
+
+const currentLetterIndex = computed(() => {
+  console.log()
+  const index = letters.value.findIndex((letter) => letter.letter === " ")
+  return index !== -1 ? index : 5
+  // return letters
+})
 </script>
 
 <template>
@@ -46,12 +53,13 @@ const letters = computed(() => {
   <div></div>
     <Letter
       class="letter"
-      v-for="letter in letters"
+      v-for="(letter, index) in letters"
       :letter="letter.letter"
       :is-correct="letter.isCorrect"
       :is-exist="letter.isExist"
       :is-revealed="props.isRevealed"
       :is-selected="props.isSelected"
+      :is-highlighted="currentLetterIndex === index"
     />
   </section>
 </template>

@@ -21,6 +21,10 @@ const props = defineProps({
   isSelected: {
     type: Boolean,
     default: false
+  },
+  isHighlighted: {
+    type: Boolean,
+    default: false
   }
 });
 </script>
@@ -30,7 +34,8 @@ const props = defineProps({
     :class="[style.letter]"
   >
     <div :class="[style.letterContent.default, {
-      [style.letterContent.selected]: props.isSelected,
+      [style.letterContent.selected]: props.isSelected && !props.isHighlighted,
+      [style.letterContent.highlighted]: props.isSelected && props.isHighlighted,
       [style.letterContent.correct]: props.isCorrect,
       [style.letterContent.exists]: props.isExist,
       [style.letterContent.revealed]: props.isRevealed && !props.isCorrect && !props.isExist,

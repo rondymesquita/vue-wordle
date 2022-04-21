@@ -20,7 +20,7 @@ export const letterContentBase = style({
   height: "100%",
   padding: 0,
   margin: 0,
-  transition: "all 1.3s",
+  transition: "all 0.4s",
   transformStyle: "preserve-3d",
   background: "#290433",
   borderRadius: 5,
@@ -34,6 +34,13 @@ export const letterContent = styleVariants({
     {
       background: "transparent",
       boxShadow: "0 0 0 3px #4E0962 inset",
+    },
+  ],
+  highlighted: [
+    letterContentBase,
+    {
+      background: "transparent",
+      boxShadow: "0 0 0 3px #fff inset",
     },
   ],
   correct: [
