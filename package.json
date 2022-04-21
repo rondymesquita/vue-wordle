@@ -10,6 +10,8 @@
   "dependencies": {
     "@vanilla-extract/css": "^1.7.0",
     "@vanilla-extract/vite-plugin": "^3.1.4",
+    "polished": "^4.2.2",
+    "tailwindcss": "^3.0.24",
     "vue": "^3.2.25"
   },
   "devDependencies": {
@@ -17,6 +19,7 @@
     "typescript": "^4.5.4",
     "unplugin-vue-components": "^0.19.3",
     "vite": "^2.9.2",
+    "vite-plugin-terminal": "^1.0.1",
     "vue-tsc": "^0.34.7"
   }
 }

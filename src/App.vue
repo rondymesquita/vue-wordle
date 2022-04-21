@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { themeClass, vars } from "./theme.css";
+import * as style from "./App.css.ts"
+
 import { onMounted, ref, computed, nextTick } from 'vue';
 import { calculate, resultFromTerm, createEmptyResult } from './functions';
 import { getWord } from './words';
@@ -23,7 +26,7 @@ const isInputValid = computed(() => {
 const wordComp = ref();
 
 onMounted(() => {
-  input.value.focus();
+  // input.value.focus();
 });
 
 const onType = (event) => {
@@ -60,6 +63,8 @@ const onSubmit = (event) => {
 </script>
 
 <template>
+<div :class="themeClass">
+<main :class="style.main">
   <form @submit.prevent="onSubmit">
     <input
       ref="input"
@@ -84,27 +89,11 @@ const onSubmit = (event) => {
       :is-selected="currentRow === index"
     />
   </div>
+</main>
+</div>
 </template>
 
 <style>
-html {
-  background: #1a1124;
-  color: #fff;
-}
-
-* {
-  box-sizing: border-box;
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin-top: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .input {
   outline: none !important;
