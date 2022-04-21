@@ -21,4 +21,5 @@ export const main = style({
   flexDirection: "column",
   alignItems: "center",
   background: vars.color.bg,
+  height: "100vh",
 });

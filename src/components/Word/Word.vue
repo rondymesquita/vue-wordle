@@ -19,13 +19,21 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  currentLetterIndex: {
+    type: Number,
+    default: 0,
+  },
 });
+
+/**
+ * Fill empty letters with empty spaces
+ */
 
 const letters = computed(() => {
   const lettersFromResult = [];
   for (let i = 0; i < props.size; i++) {
     const value = props.result[i];
-    console.log(value);
+    // console.log(value);
     if (value) {
       lettersFromResult.push({...value});
     } else {
@@ -40,12 +48,12 @@ const letters = computed(() => {
   return lettersFromResult;
 });
 
-const currentLetterIndex = computed(() => {
-  console.log()
-  const index = letters.value.findIndex((letter) => letter.letter === " ")
-  return index !== -1 ? index : 5
-  // return letters
-})
+// const currentLetterIndex = computed(() => {
+//   console.log()
+//   const index = letters.value.findIndex((letter) => letter.letter === " ")
+//   return index !== -1 ? index : 5
+//   // return letters
+// })
 </script>
 
 <template>
@@ -59,7 +67,8 @@ const currentLetterIndex = computed(() => {
       :is-exist="letter.isExist"
       :is-revealed="props.isRevealed"
       :is-selected="props.isSelected"
-      :is-highlighted="currentLetterIndex === index"
+      :is-highlighted="props.currentLetterIndex === index"
+      @click="props.isSelected && $emit('onLetterClick', index)"
     />
   </section>
 </template>

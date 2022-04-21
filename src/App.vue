@@ -9,16 +9,18 @@ import { ResultItem } from './types';
 const { log } = console;
 
 const MAX_ATTEMPTS = 5;
-const MAX_TERM_SIZE = 5;
+const MAX_COLUMN_SIZE = 5;
+const MAX_ROW_SIZE = 5;
 
 const secretTerm = getWord();
 const input = ref();
 const size = ref(5);
 
-const term = ref('123');
-const results = ref([{}, {}, {}, {}, {}]);
+const term = ref('    ');
+const results = ref([[],[],[],[],[]]);
 const attemptNumber = ref(MAX_ATTEMPTS);
 const currentRow = ref(0);
+const currentColumn = ref(0);
 
 const isInputValid = computed(() => {
   return term.value.length === size.value;
@@ -29,43 +31,78 @@ onMounted(() => {
   // input.value.focus();
 });
 
-const onType = (event) => {
-  if (attemptNumber.value === 0) {
-    return;
+const replaceAt = (value:string, replacement: string, index: number, ) => {
+    if (index >= value.length) {
+        return value.valueOf();
+    }
+
+    return value.substring(0, index) + replacement + value.substring(index + 1);
+}
+
+const onType = (event: Event) => {
+  const ENTER = 13
+  if (event.keyCode === ENTER) {
+    onSubmit()
+    return
+  }
+  if(currentColumn.value === MAX_COLUMN_SIZE) {
+    return
+  }
+  if(currentRow.value === MAX_ROW_SIZE) {
+    return
   }
 
-  term.value = event.target.value;
-  results.value[currentRow.value].result = resultFromTerm(
-    event.target.value,
-    MAX_TERM_SIZE
-  );
+  /**
+   * Fill array
+   */
+  const size = results.value[currentRow.value].length
+  if (size !== currentColumn.value) {
+    for(let i = size; i < currentColumn.value; i++) {
+      results.value[currentRow.value].push({letter: ""})
+    }
+  }
+
+
+  const letter = String.fromCharCode(event.keyCode)
+  const position = results.value[currentRow.value]
+  console.log(JSON.stringify(position))
+  if (position.length === 0) {
+    position.push({letter})
+  } else if (position[currentColumn.value]) {
+    position.splice(currentColumn.value, 1, {letter})
+  } else {
+    position.push({letter})
+  }
+  currentColumn.value += 1
 };
 
-const onSubmit = (event) => {
-  if (input.value.value.length < size.value) {
-    return;
-  }
+document.addEventListener('keypress', onType)
+
+const onSubmit = () => {
   if (attemptNumber.value === 0) {
     return;
   }
 
-  const result = calculate(term.value, secretTerm);
-  log(term.value, result);
-  results.value[currentRow.value].result = result;
+  const typedTerm = results.value[currentRow.value].map((result) => result.letter).join("")
 
-  term.value = '';
-  input.value.value = '';
+  const result = calculate(typedTerm, secretTerm);
+  log(typedTerm, result)
+  results.value[currentRow.value] = result
+
   attemptNumber.value = attemptNumber.value - 1;
-  currentRow.value = currentRow.value + 1;
-
-  event.preventDefault();
+  currentRow.value += 1;
+  currentColumn.value = 0
 };
+
+const onLetterClick = (index: number) => {
+  currentColumn.value = index
+}
 </script>
 
 <template>
 <div :class="themeClass">
 <main :class="style.main">
-  <form @submit.prevent="onSubmit">
+  <!-- <form @submit.prevent="onSubmit">
     <input
       ref="input"
       @input="onType"
@@ -75,18 +112,23 @@ const onSubmit = (event) => {
         'input--is-valid': isInputValid,
       }"
     />
-  </form>
+  </form> -->
   <div>Tentativas: {{ attemptNumber }}</div>
   <div v-if="attemptNumber === 0">A palavra é: {{ secretTerm }}</div>
-
+  {{secretTerm}}
   <div class="scroll">
+    <!-- {{results}}
+    {{currentColumn}}
+    {{results[currentRow].length}} -->
     <Word
       v-for="(result, index) in results"
       :key="`${index}`"
-      :result="result.result"
+      :result="result"
       :size="size"
       :is-revealed="currentRow > index"
       :is-selected="currentRow === index"
+      :current-letter-index="currentColumn"
+      @onLetterClick="onLetterClick"
     />
   </div>
 </main>
