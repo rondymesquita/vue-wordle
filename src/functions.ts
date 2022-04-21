@@ -1,11 +1,4 @@
-import { Result, ResultItem } from './types';
-
-export const createEmptyResult = (size: number) => {
-  const xxx = Array(size).fill({});
-
-  console.log(xxx);
-  return xxx;
-};
+import { Result, ResultItem } from "./types";
 
 export const resultFromTerm = (
   term: string,
@@ -23,7 +16,7 @@ export const resultFromTerm = (
       });
     } else {
       result.push({
-        letter: ' ',
+        letter: " ",
         isCorrect: false,
         isExist: false,
       });
@@ -33,14 +26,24 @@ export const resultFromTerm = (
   return result;
 };
 
+const sanitize = (term: string) => {
+  return term
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase();
+};
+
 export const calculate = (term: string, secretTerm: string) => {
   const result: Result = [];
-  for (let i = 0; i < term.length; i++) {
-    const letter = term[i];
-    const isCorrect = letter === secretTerm[i];
-    const isExist = secretTerm.includes(letter) && !isCorrect;
+  const sanitizedTerm = sanitize(term);
+  const sanitizedSecretTerm = sanitize(secretTerm);
+
+  for (let i = 0; i < sanitizedTerm.length; i++) {
+    const letter = sanitizedTerm[i];
+    const isCorrect = letter === sanitizedSecretTerm[i];
+    const isExist = sanitizedSecretTerm.includes(letter) && !isCorrect;
     const letterResult: ResultItem = {
-      letter,
+      letter: isCorrect ? secretTerm[i] : letter,
       isCorrect,
       isExist,
     };
