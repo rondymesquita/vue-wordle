@@ -17,6 +17,6 @@ export const [themeClass, vars] = createTheme({
     warning: "#CA8A04",
   },
   font: {
-    body: "Avenir, Helvetica, Arial, sans-serif",
+    body: "Oxygen",
   },
 });

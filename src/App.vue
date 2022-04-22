@@ -2,8 +2,8 @@
 import { themeClass, vars } from "./theme.css";
 import * as style from "./App.css.ts"
 
-import { onMounted, ref, computed, nextTick } from 'vue';
-import { calculate, resultFromTerm, createEmptyResult } from './functions';
+import { onMounted, ref, computed } from 'vue';
+import { calculate } from './functions';
 import { getWord } from './words';
 import Keyboard from "./components/Keyboard/Keyboard.vue";
 const { log } = console;
@@ -118,21 +118,21 @@ document.addEventListener('keydown', onType)
 <template>
 <div :class="themeClass">
 <main :class="style.main">
-<div :class="style.content">
-  <div>Tentativas: {{ attemptNumber }}</div>
-  <div v-if="attemptNumber === 0">A palavra é: {{ secretTerm }}</div>
-  <div class="scroll">
-    <Word
-      v-for="(result, index) in results"
-      :key="`${index}`"
-      :result="result"
-      :size="size"
-      :is-revealed="currentRow > index"
-      :is-selected="currentRow === index"
-      :current-letter-index="currentColumn"
-      @onLetterClick="onLetterClick"
-    />
-  </div>
+  <div :class="style.content">
+  <!-- <div>Tentativas: {{ attemptNumber }}</div> -->
+    <div v-if="attemptNumber === 0">A palavra é: {{ secretTerm }}</div>
+    <div class="scroll">
+      <Word
+        v-for="(result, index) in results"
+        :key="`${index}`"
+        :result="result"
+        :size="size"
+        :is-revealed="currentRow > index"
+        :is-selected="currentRow === index"
+        :current-letter-index="currentColumn"
+        @onLetterClick="onLetterClick"
+      />
+    </div>
   </div>
   <div :class="style.keyboard">
     <Keyboard
