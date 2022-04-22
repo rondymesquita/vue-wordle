@@ -12,8 +12,8 @@ const MAX_ATTEMPTS = 6;
 const MAX_COLUMN_SIZE = 5;
 const MAX_ROW_SIZE = 6;
 
-const secretTerm = getWord();
-// const secretTerm = 'ácido';
+const secretTerm = ref(getWord());
+
 const size = ref(5);
 
 const term = ref('    ');
@@ -30,6 +30,14 @@ const wordComp = ref();
 onMounted(() => {
   // input.value.focus();
 });
+
+const reset = () => {
+  results.value = [[],[],[],[],[],[]]
+  attemptNumber.value = MAX_ATTEMPTS
+  currentRow.value = 0
+  currentColumn.value = 0
+  secretTerm.value = getWord();
+}
 
 
 const handleRemoveLetter = () => {
@@ -99,7 +107,7 @@ const submitResult = () => {
 
   const typedTerm = results.value[currentRow.value].map((result) => result.letter).join("")
 
-  const result = calculate(typedTerm, secretTerm);
+  const result = calculate(typedTerm, secretTerm.value);
   log(typedTerm, result)
   results.value[currentRow.value] = result
 
@@ -120,7 +128,13 @@ document.addEventListener('keydown', onType)
 <main :class="style.main">
   <div :class="style.content">
   <!-- <div>Tentativas: {{ attemptNumber }}</div> -->
-    <div v-if="attemptNumber === 0">A palavra é: {{ secretTerm }}</div>
+    <div v-if="attemptNumber === 0" style="padding: 20px;">
+    <!-- <div style="padding: 8px;"> -->
+      <div>A palavra é: {{ secretTerm }}</div>
+      <div>
+        <ButtonComp @click="reset">Jogar de novo</ButtonComp>
+      </div>
+    </div>
     <div class="scroll">
       <Word
         v-for="(result, index) in results"

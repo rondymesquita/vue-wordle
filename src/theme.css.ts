@@ -15,6 +15,8 @@ export const [themeClass, vars] = createTheme({
     success: "#21fa90",
     success250: darken(0.25, "#21fa90"),
     warning: "#CA8A04",
+    primary: "#ff1053",
+    primary100: darken(0.1, "#ff1053"),
   },
   font: {
     body: "Oxygen",

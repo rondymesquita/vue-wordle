@@ -21,7 +21,7 @@ export const letter = style({
   background: color.background200,
   padding: "15px 10px",
   marginRight: 6,
-  fontSize: 18,
+  fontSize: 20,
   textTransform: "uppercase",
   borderRadius: 4,
   selectors: {

@@ -5,9 +5,10 @@ import { lighten } from "polished";
 const { color } = vars;
 
 export const letter = style({
+  fontSize: 28,
   marginRight: "4px",
-  minHeight: "45px",
-  minWidth: "45px",
+  minHeight: "60px",
+  minWidth: "60px",
   fontWeight: "900",
   perspective: "1000px" /* Remove this if you don't want the 3D effect */,
   selectors: {
