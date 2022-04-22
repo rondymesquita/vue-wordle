@@ -5,14 +5,15 @@ import * as style from "./App.css.ts"
 import { onMounted, ref, computed, nextTick } from 'vue';
 import { calculate, resultFromTerm, createEmptyResult } from './functions';
 import { getWord } from './words';
+import Keyboard from "./components/Keyboard/Keyboard.vue";
 const { log } = console;
 
 const MAX_ATTEMPTS = 6;
 const MAX_COLUMN_SIZE = 5;
 const MAX_ROW_SIZE = 6;
 
-// const secretTerm = getWord();
-const secretTerm = 'ácido';
+const secretTerm = getWord();
+// const secretTerm = 'ácido';
 const size = ref(5);
 
 const term = ref('    ');
@@ -32,6 +33,9 @@ onMounted(() => {
 
 
 const handleRemoveLetter = () => {
+  if (currentColumn.value === 0) {
+    return
+  }
   const position = results.value[currentRow.value]
   if (position[currentColumn.value]) {
     position.splice(currentColumn.value, 1, {letter: ""})
@@ -88,8 +92,6 @@ const onType = (event: Event) => {
   handleAddLetter(letter)
 };
 
-
-
 const submitResult = () => {
   if (attemptNumber.value === 0) {
     return;
@@ -116,13 +118,10 @@ document.addEventListener('keydown', onType)
 <template>
 <div :class="themeClass">
 <main :class="style.main">
+<div :class="style.content">
   <div>Tentativas: {{ attemptNumber }}</div>
   <div v-if="attemptNumber === 0">A palavra é: {{ secretTerm }}</div>
-  <!-- {{secretTerm}} -->
   <div class="scroll">
-    <!-- {{results}} -->
-    <!-- {{currentColumn}}
-    {{results[currentRow].length}} -->
     <Word
       v-for="(result, index) in results"
       :key="`${index}`"
@@ -132,6 +131,14 @@ document.addEventListener('keydown', onType)
       :is-selected="currentRow === index"
       :current-letter-index="currentColumn"
       @onLetterClick="onLetterClick"
+    />
+  </div>
+  </div>
+  <div :class="style.keyboard">
+    <Keyboard
+      @onLetterClick="(letter) => handleAddLetter(letter)"
+      @onEnterClick="submitResult"
+      @onDelClick="handleRemoveLetter"
     />
   </div>
 </main>

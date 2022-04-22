@@ -5,6 +5,7 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Keyboard: typeof import('./src/components/Keyboard/Keyboard.vue')['default']
     Letter: typeof import('./src/components/Letter/Letter.vue')['default']
     Word: typeof import('./src/components/Word/Word.vue')['default']
   }

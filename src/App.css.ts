@@ -4,12 +4,14 @@ import { vars } from "./theme.css";
 globalStyle("body", {
   padding: 0,
   margin: 0,
+  zoom: "100%",
 });
 
 globalStyle("*", {
   padding: 0,
   margin: 0,
   boxSizing: "border-box",
+  userSelect: "none",
 });
 
 export const main = style({
@@ -22,4 +24,9 @@ export const main = style({
   alignItems: "center",
   background: vars.color.background,
   height: "100vh",
+  justifyContent: "space-between",
 });
+
+export const content = style({});
+
+export const keyboard = style({});

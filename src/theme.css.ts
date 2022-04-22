@@ -10,6 +10,7 @@ export const [themeClass, vars] = createTheme({
     background: "#595E6D",
     background50: darken(0.1, "#595E6D"),
     background200: darken(0.2, "#595E6D"),
+    background300: darken(0.3, "#595E6D"),
     accent: "red",
     success: "#21fa90",
     success250: darken(0.25, "#21fa90"),
