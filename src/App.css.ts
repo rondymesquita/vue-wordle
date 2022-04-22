@@ -20,6 +20,6 @@ export const main = style({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  background: vars.color.bg,
+  background: vars.color.background,
   height: "100vh",
 });

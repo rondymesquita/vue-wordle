@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import * as style from './style.css.ts'
+import * as style from './Letter.css.ts'
 
 const props = defineProps({
   letter: {

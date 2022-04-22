@@ -2,6 +2,8 @@ import { style, globalStyle, styleVariants } from "@vanilla-extract/css";
 import { vars } from "../../theme.css";
 import { lighten } from "polished";
 
+const { color } = vars;
+
 export const letter = style({
   marginRight: "4px",
   minHeight: "45px",
@@ -22,9 +24,9 @@ export const letterContentBase = style({
   margin: 0,
   transition: "all 0.4s",
   transformStyle: "preserve-3d",
-  background: "#290433",
+  background: vars.color.background50,
   borderRadius: 5,
-  color: "#fff",
+  color: vars.color.foreground,
 });
 
 export const letterContent = styleVariants({
@@ -33,34 +35,34 @@ export const letterContent = styleVariants({
     letterContentBase,
     {
       background: "transparent",
-      boxShadow: "0 0 0 3px #4E0962 inset",
+      boxShadow: `0 0 0 3px ${color.background200} inset`,
     },
   ],
   highlighted: [
     letterContentBase,
     {
       background: "transparent",
-      boxShadow: "0 0 0 3px #fff inset",
+      boxShadow: `0 0 0 3px ${color.foreground} inset`,
     },
   ],
   correct: [
     letterContentBase,
     {
-      background: "#65A30D",
+      background: color.success250,
       transform: "rotateY(180deg)",
     },
   ],
   exists: [
     letterContentBase,
     {
-      background: "#CA8A04",
+      background: color.warning,
       transform: "rotateY(180deg)",
     },
   ],
   revealed: [
     letterContentBase,
     {
-      background: "#C4B5FD",
+      background: vars.color.background200,
       transform: "rotateY(180deg)",
     },
   ],

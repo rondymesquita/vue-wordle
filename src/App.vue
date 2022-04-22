@@ -11,8 +11,8 @@ const MAX_ATTEMPTS = 6;
 const MAX_COLUMN_SIZE = 5;
 const MAX_ROW_SIZE = 6;
 
-const secretTerm = getWord();
-// const secretTerm = 'ácido';
+// const secretTerm = getWord();
+const secretTerm = 'ácido';
 const size = ref(5);
 
 const term = ref('    ');
