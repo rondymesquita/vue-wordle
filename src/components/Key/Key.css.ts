@@ -26,6 +26,7 @@ export const key = styleVariants({
     baseKey,
     {
       background: color.warning,
+      color: color.foreground,
     },
   ],
   isMissing: [
@@ -39,6 +40,7 @@ export const key = styleVariants({
     baseKey,
     {
       background: color.success250,
+      color: color.foreground,
     },
   ],
 });
