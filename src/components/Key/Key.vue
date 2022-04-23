@@ -23,7 +23,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div
+  <span
     :class="[
       style.key.default,
       {
@@ -34,7 +34,7 @@ const props = defineProps({
     ]"
   >
     {{ value }}
-  </div>
+  </span>
 </template>
 
 <style scoped></style>

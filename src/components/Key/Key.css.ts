@@ -5,7 +5,7 @@ const { color } = vars;
 export const baseKey = style({
   background: color.background200,
   padding: '15px 10px',
-  marginRight: 6,
+  marginRight: '0.3em',
   // minWidth: 36,
   fontSize: 18,
   textTransform: 'uppercase',
@@ -32,7 +32,7 @@ export const key = styleVariants({
     baseKey,
     {
       background: color.background50,
-      color: color.foreground200,
+      color: color.foreground300,
     },
   ],
   isCorrect: [

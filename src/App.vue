@@ -46,6 +46,9 @@ const handleRemoveLetter = () => {
 };
 
 const handleAddLetter = (letter: string) => {
+  if (isWordComplete.value) {
+    return;
+  }
   /**
    * When click on any position on word, this fill from the beggining until the
    * current position with empty letters
@@ -104,8 +107,7 @@ const onType = (event: Event) => {
   const DEL = 46;
   const BACKSPACE = 8;
 
-  const canPressEnter = isWordComplete.value;
-  if (event.keyCode === ENTER && canPressEnter) {
+  if (event.keyCode === ENTER) {
     submitResult();
     return;
   }
@@ -141,6 +143,10 @@ const calculateUsedLetters = () => {
 };
 
 const submitResult = () => {
+  const canPressEnter = isWordComplete.value;
+  if (!canPressEnter) {
+    return;
+  }
   if (attemptNumber.value === 0) {
     return;
   }

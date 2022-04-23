@@ -8,6 +8,7 @@ export const [themeClass, vars] = createTheme({
     bg: '#15161E',
     foreground: '#fff',
     foreground200: darken(0.2, '#fff'),
+    foreground300: darken(0.3, '#fff'),
     background: '#595E6D',
     background50: darken(0.1, '#595E6D'),
     background200: darken(0.2, '#595E6D'),

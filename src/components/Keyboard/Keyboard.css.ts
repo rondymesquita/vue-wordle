@@ -15,4 +15,6 @@ export const keyboard = style({
 export const line = style({
   display: 'flex',
   marginBottom: 8,
+  justifyContent: 'center',
+  width: '100%',
 });
