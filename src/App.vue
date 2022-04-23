@@ -182,7 +182,7 @@ document.addEventListener('keydown', onType);
   <div :class="themeClass">
     <main :class="style.main">
       <div :class="style.content">
-        {{ isWordComplete }}
+        <!-- {{ isWordComplete }} -->
         <!-- <div>Tentativas: {{ attemptNumber }}</div> -->
         <div v-if="attemptNumber === 0" style="padding: 20px">
           <!-- <div style="padding: 8px;"> -->

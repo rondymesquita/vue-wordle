@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development vite",
+    "dev": "cross-env NODE_ENV=development vite --host",
     "build": "vue-tsc --noEmit && cross-env NODE_ENV=production vite build",
     "build:no-ts": "cross-env NODE_ENV=production vite build",
     "preview": "vite preview"
