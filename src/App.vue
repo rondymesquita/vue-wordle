@@ -12,8 +12,8 @@ const MAX_ATTEMPTS = 6;
 const MAX_COLUMN_SIZE = 5;
 const MAX_ROW_SIZE = 6;
 
-// const secretTerm = ref(getWord());
-const secretTerm = ref('qcido');
+const secretTerm = ref(getWord());
+// const secretTerm = ref('qcido');
 
 const size = ref(5);
 
@@ -95,7 +95,7 @@ const isAllowedLetter = (letter: string) => {
     'b',
     'n',
     'm',
-  ].includes(letter);
+  ].includes(letter.toLowerCase());
 };
 
 const onType = (event: Event) => {
@@ -103,7 +103,9 @@ const onType = (event: Event) => {
   const ENTER = 13;
   const DEL = 46;
   const BACKSPACE = 8;
-  if (event.keyCode === ENTER) {
+
+  const canPressEnter = isWordComplete.value;
+  if (event.keyCode === ENTER && canPressEnter) {
     submitResult();
     return;
   }
@@ -162,6 +164,17 @@ const onLetterClick = (index: number) => {
   currentColumn.value = index;
 };
 
+const isWordComplete = computed(() => {
+  console.log(results.value);
+  const value = results.value[currentRow.value];
+
+  if (!value) {
+    return false;
+  }
+  return value.length === size.value;
+  // return results.value[currentRow.value].letter.length === size.value;
+});
+
 document.addEventListener('keydown', onType);
 </script>
 
@@ -169,7 +182,7 @@ document.addEventListener('keydown', onType);
   <div :class="themeClass">
     <main :class="style.main">
       <div :class="style.content">
-        <!-- {{ resultAllLettersSoFar }} -->
+        {{ isWordComplete }}
         <!-- <div>Tentativas: {{ attemptNumber }}</div> -->
         <div v-if="attemptNumber === 0" style="padding: 20px">
           <!-- <div style="padding: 8px;"> -->
