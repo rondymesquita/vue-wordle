@@ -26,12 +26,14 @@ export const resultFromTerm = (
   return result;
 };
 
-const sanitize = (term: string) => {
-  return term
+export const sanitize = (letter: string) => {
+  return letter
     .normalize("NFD")
     .replace(/\p{Diacritic}/gu, "")
     .toLowerCase();
 };
+
+
 
 export const calculate = (term: string, secretTerm: string) => {
   const result: Result = [];
