@@ -38,11 +38,11 @@ const handleRemoveLetter = () => {
   }
   const position = results.value[currentRow.value];
   if (position[currentColumn.value]) {
-    position.splice(currentColumn.value, 1, { letter: '' });
-  } else {
+    position.splice(currentColumn.value, 1, {});
+  } else if (position[currentColumn.value - 1]) {
     position.pop();
-    currentColumn.value -= 1;
   }
+  currentColumn.value -= 1;
 };
 
 const handleAddLetter = (letter: string) => {
@@ -56,7 +56,7 @@ const handleAddLetter = (letter: string) => {
   const size = results.value[currentRow.value].length;
   if (size !== currentColumn.value) {
     for (let i = size; i < currentColumn.value; i++) {
-      results.value[currentRow.value].push({ letter: '' });
+      results.value[currentRow.value].push({ letter: ' ' });
     }
   }
 
