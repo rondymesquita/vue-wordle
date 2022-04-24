@@ -7,7 +7,7 @@ import Terminal from 'vite-plugin-terminal';
 let base;
 
 if (process.env.NODE_ENV === 'production') {
-  base = '/';
+  base = '/vue-wordle/';
 } else {
   base = '/';
 }
