@@ -33,7 +33,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div :class="themeClass">
+  <div :class="[themeClass, style.app]">
     <Game ref="game" />
   </div>
 </template>

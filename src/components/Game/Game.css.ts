@@ -4,13 +4,13 @@ import { vars } from '../../theme.css';
 export const main = style({
   fontFamily: vars.font.body,
   color: 'white',
-  paddingBottom: 15,
+  padding: 15,
   textAlign: 'center',
   display: 'flex',
   flexDirection: 'column',
   // alignItems: "center",
   background: vars.color.background,
-  height: '98vh',
+  minHeight: '100%',
   justifyContent: 'space-between',
 });
 

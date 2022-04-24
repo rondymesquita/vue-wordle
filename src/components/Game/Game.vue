@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { calculate } from '../../functions';
+import { calculate, sanitize } from '../../functions';
 import { getWord } from '../../words';
 /* @ts-ignore */
 import * as style from './Game.css.ts';
@@ -38,7 +38,8 @@ let usedLetters: Array<Result> = [];
 
 const typedTerm = ref('');
 const secretTerm = ref(getWord());
-// const secretTerm = ref('qcido');
+// const secretTerm = ref('sócio');
+const sanitizedSecretTerm = ref(sanitize(secretTerm.value));
 const results = ref<Array<Array<Result>>>(createEmptyBoard());
 const attemptNumber = ref(MAX_ATTEMPTS);
 const currentRow = ref(0);
@@ -71,31 +72,35 @@ const reset = () => {
 };
 
 const removeLetter = () => {
-  if (currentColumn.value === 0) {
-    return;
-  }
+  // console.log('currentColumn.value', currentColumn.value);
+  // if (currentColumn.value === 0) {
+  //   return;
+  // }
   const position = results.value[currentRow.value];
-  if (position[currentColumn.value]) {
-    position.splice(currentColumn.value, 1, { letter: '' });
-  } else if (position[currentColumn.value - 1]) {
-    position.pop();
-  }
-  currentColumn.value -= 1;
+  // if (position[currentColumn.value]) {
+  position.splice(currentColumn.value, 1, { letter: '' });
+  // } else if (position[currentColumn.value - 1]) {
+  //   position.pop();
+  // }
+
+  if (currentColumn.value > 0) currentColumn.value -= 1;
+  console.log('currentColumn.value', currentColumn.value);
 };
 
 const addLetter = (letter: string) => {
-  if (isWordComplete.value) {
-    return;
-  }
+  // if (isWordComplete.value) {
+  //   return;
+  // }
 
   const position = results.value[currentRow.value];
 
-  if (position[currentColumn.value]) {
-    position.splice(currentColumn.value, 1, { letter });
-  } else {
-    position.push({ letter });
-  }
-  currentColumn.value += 1;
+  // if (position[currentColumn.value]) {
+  position.splice(currentColumn.value, 1, { letter });
+  // } else {
+  //   // position.push({ letter });
+  // }
+  if (currentColumn.value < 4) currentColumn.value += 1;
+  console.log('currentColumn.value', currentColumn.value);
 };
 
 const calculateUsedLetters = () => {
@@ -149,15 +154,18 @@ const processTerm = () => {
 
 const onLetterClick = (index: number) => {
   currentColumn.value = index;
+  console.log('currentColumn.value', currentColumn.value);
 };
 
 const isWordComplete = computed(() => {
   const value = results.value[currentRow.value];
+  // console.log(value.length);
 
-  if (!value) {
+  if (!value || value.length === 0) {
     return false;
   }
-  return value.every((result) => !!result.letter);
+
+  return value.every((result) => result.letter !== '');
 });
 
 const isGameOver = computed(() => {
@@ -165,14 +173,14 @@ const isGameOver = computed(() => {
 });
 
 const isWin = computed(() => {
-  return typedTerm.value === secretTerm.value;
+  return typedTerm.value === sanitizedSecretTerm.value;
 });
 </script>
 <template>
   <main :class="style.main">
     <div :class="style.content">
       <!-- {{ isWordComplete }} -->
-      <div>Tentativas: {{ attemptNumber }}</div>
+      <!-- <div>Tentativas: {{ attemptNumber }}</div> -->
       <div v-if="isGameOver" style="padding: 20px">
         <div>A palavra é: {{ secretTerm }}</div>
         <div>

@@ -13,3 +13,8 @@ globalStyle('*', {
   boxSizing: 'border-box',
   userSelect: 'none',
 });
+
+export const app = style({
+  height: '100vh',
+  overflow: 'hidden',
+});
