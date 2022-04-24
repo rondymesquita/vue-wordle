@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch } from 'vue';
+
+/* @ts-ignore */
 import * as style from './style.css.ts';
 
 const props = defineProps({

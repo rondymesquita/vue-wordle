@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { themeClass, vars } from './theme.css';
-
-import { onMounted, ref, computed, watch, watchEffect } from 'vue';
-import { calculate, sanitize } from './functions';
-import { getWord } from './words';
-import Keyboard from './components/Keyboard/Keyboard.vue';
-import { KeyboardController } from './controllers/keyboard-controller';
+import { ref, computed } from 'vue';
+import { calculate } from '../../functions';
+import { getWord } from '../../words';
+/* @ts-ignore */
 import * as style from './Game.css.ts';
-import { Result } from './types';
+import { Result } from '../../types';
 
 const props = defineProps({
   letter: {
@@ -15,6 +12,10 @@ const props = defineProps({
     default: '',
   },
 });
+
+const MAX_ATTEMPTS = 6;
+const MAX_COLUMN_SIZE = 5;
+const MAX_ROW_SIZE = 6;
 
 const createEmptyBoard = () => {
   const createEmptyResult = (): Result => {
@@ -32,10 +33,6 @@ const createEmptyBoard = () => {
         .map(() => createEmptyResult())
     );
 };
-
-const MAX_ATTEMPTS = 6;
-const MAX_COLUMN_SIZE = 5;
-const MAX_ROW_SIZE = 6;
 
 const typedTerm = ref('');
 const secretTerm = ref(getWord());
@@ -204,7 +201,7 @@ const isWin = computed(() => {
     <div :class="style.keyboard">
       <Keyboard
         ref="keyboard"
-        @onLetter="(letter) => addLetter(letter)"
+        @onLetter="(letter: string) => addLetter(letter)"
         @onEnter="processTerm"
         @onDel="removeLetter"
       />

@@ -1,7 +1,7 @@
 import { style, globalStyle } from '@vanilla-extract/css';
 import { vars } from './theme.css';
 
-globalStyle('body', {
+globalStyle('body, html', {
   padding: 0,
   margin: 0,
   zoom: '100%',

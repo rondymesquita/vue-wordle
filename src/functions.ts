@@ -1,31 +1,5 @@
 import { Result } from './types';
 
-export const resultFromTerm = (
-  term: string,
-  size: number
-): Array<ResultItem> => {
-  const result: Array<ResultItem> = [];
-
-  for (let i = 0; i < size; i++) {
-    const value = term[i];
-    if (value) {
-      result.push({
-        letter: value,
-        isCorrect: false,
-        isExist: false,
-      });
-    } else {
-      result.push({
-        letter: ' ',
-        isCorrect: false,
-        isExist: false,
-      });
-    }
-  }
-
-  return result;
-};
-
 export const sanitize = (letter: string): string => {
   return letter
     .normalize('NFD')

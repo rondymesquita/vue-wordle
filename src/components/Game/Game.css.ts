@@ -1,16 +1,16 @@
 import { style, globalStyle } from '@vanilla-extract/css';
-import { vars } from './theme.css';
+import { vars } from '../../theme.css';
 
 export const main = style({
   fontFamily: vars.font.body,
   color: 'white',
-  padding: 10,
+  paddingBottom: 15,
   textAlign: 'center',
   display: 'flex',
   flexDirection: 'column',
   // alignItems: "center",
   background: vars.color.background,
-  height: '100vh',
+  height: '98vh',
   justifyContent: 'space-between',
 });
 

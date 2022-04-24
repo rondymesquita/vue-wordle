@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+/* @ts-ignore */
 import * as style from './Key.css.ts';
 
 const props = defineProps({

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { Result } from '../../types';
+/* @ts-ignore */
 import * as style from './Keyboard.css.ts';
 
 // interface Props {

@@ -5,8 +5,8 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Button: typeof import('./src/components/Button/Button.vue')['default']
     ButtonComp: typeof import('./src/components/Button/ButtonComp.vue')['default']
+    Game: typeof import('./src/components/Game/Game.vue')['default']
     Key: typeof import('./src/components/Key/Key.vue')['default']
     Keyboard: typeof import('./src/components/Keyboard/Keyboard.vue')['default']
     Letter: typeof import('./src/components/Letter/Letter.vue')['default']
