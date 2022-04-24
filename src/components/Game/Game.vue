@@ -34,11 +34,12 @@ const createEmptyBoard = () => {
     );
 };
 
+let usedLetters: Array<Result> = [];
+
 const typedTerm = ref('');
 const secretTerm = ref(getWord());
 // const secretTerm = ref('qcido');
 const results = ref<Array<Array<Result>>>(createEmptyBoard());
-const usedLetters: Array<Result> = [];
 const attemptNumber = ref(MAX_ATTEMPTS);
 const currentRow = ref(0);
 const currentColumn = ref(0);
@@ -66,6 +67,7 @@ const reset = () => {
   secretTerm.value = getWord();
   typedTerm.value = '';
   keyboard.value.reset();
+  usedLetters = [];
 };
 
 const removeLetter = () => {
@@ -150,7 +152,6 @@ const onLetterClick = (index: number) => {
 };
 
 const isWordComplete = computed(() => {
-  console.log(results.value);
   const value = results.value[currentRow.value];
 
   if (!value) {

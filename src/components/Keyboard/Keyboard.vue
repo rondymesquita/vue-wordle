@@ -67,7 +67,7 @@ const setLettersState = (usedLettersResult: Array<Result>) => {
     const index = keys.value.findIndex((key) => {
       return key.letter === usedLetter.letter;
     });
-    console.log(index, usedLettersResult);
+    // console.log(index, usedLettersResult);
     keys.value.splice(index, 1, { ...usedLetter, isRevealed: true });
   });
 };
