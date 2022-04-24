@@ -74,13 +74,13 @@ const removeLetter = () => {
   if (currentColumn.value === 0) {
     return;
   }
-  currentColumn.value -= 1;
   const position = results.value[currentRow.value];
   if (position[currentColumn.value]) {
     position.splice(currentColumn.value, 1, { letter: '' });
   } else if (position[currentColumn.value - 1]) {
     position.pop();
   }
+  currentColumn.value -= 1;
 };
 
 const addLetter = (letter: string) => {
