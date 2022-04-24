@@ -1003,5 +1003,5 @@ export const words = [
 
 export const getWord = () => {
   const index = Math.floor(Math.random() * (words.length - 0 + 1) + 0);
-  return words[index];
+  return words[index].toLowerCase();
 };

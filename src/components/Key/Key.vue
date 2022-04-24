@@ -27,9 +27,10 @@ const props = defineProps({
     :class="[
       style.key.default,
       {
-        [style.key.isPresent]: props.isPresent && props.isRevealed,
+        [style.key.isPresent]: props.isPresent,
         [style.key.isMissing]: !props.isPresent && props.isRevealed,
-        [style.key.isCorrect]: props.isCorrect && props.isRevealed,
+        [style.key.isCorrect]: props.isCorrect,
+        [style.key.isRevealed]: props.isRevealed,
       },
     ]"
   >

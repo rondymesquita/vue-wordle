@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch } from 'vue';
-import * as style from "./style.css.ts"
+import * as style from './style.css.ts';
 
 const props = defineProps({
   size: {
@@ -35,7 +35,7 @@ const letters = computed(() => {
     const value = props.result[i];
     // console.log(value);
     if (value) {
-      lettersFromResult.push({...value});
+      lettersFromResult.push({ ...value });
     } else {
       lettersFromResult.push({
         letter: ' ',
@@ -48,17 +48,21 @@ const letters = computed(() => {
   return lettersFromResult;
 });
 
-// const currentLetterIndex = computed(() => {
-//   console.log()
-//   const index = letters.value.findIndex((letter) => letter.letter === " ")
-//   return index !== -1 ? index : 5
-//   // return letters
-// })
+// const letters = computed(() => {
+//   return props.term.split('');
+// });
 </script>
 
 <template>
   <section :class="props.isSelected ? style.word.selected : style.word.default">
-  <div></div>
+    <div></div>
+    <!-- <Letter
+      class="letter"
+      v-for="(letter, index) in props.term"
+      :letter="letter"
+      :is-highlighted="props.currentLetterIndex === index"
+      @click="props.isSelected && $emit('onLetterClick', index)"
+    /> -->
     <Letter
       class="letter"
       v-for="(letter, index) in letters"

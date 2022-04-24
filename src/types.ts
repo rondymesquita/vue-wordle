@@ -1,9 +1,6 @@
-export class ResultItem {
+export class Result {
   letter: string = '';
-  isCorrect: boolean = false;
-  isExist: boolean = false;
+  isCorrect?: boolean = false;
+  isExist?: boolean = false;
+  isRevealed?: boolean = false;
 }
-
-export type Result = Array<ResultItem>;
-
-// export interface Word
