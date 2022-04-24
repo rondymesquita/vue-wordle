@@ -38,8 +38,8 @@ const MAX_COLUMN_SIZE = 5;
 const MAX_ROW_SIZE = 6;
 
 const typedTerm = ref('');
-// const secretTerm = ref(getWord());
-const secretTerm = ref('qcido');
+const secretTerm = ref(getWord());
+// const secretTerm = ref('qcido');
 const results = ref<Array<Array<Result>>>(createEmptyBoard());
 const usedLetters: Array<Result> = [];
 const attemptNumber = ref(MAX_ATTEMPTS);
